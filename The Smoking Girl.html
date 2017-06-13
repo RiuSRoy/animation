@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The modern girl
+	</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<!--<link rel="stylesheet" type="text/css" href="abd.css">-->
+
+	<style>
+	    canvas {
+	      border: saddlebrown 10px solid;
+	    }
+	 
+	    body {
+	      padding: 50px;
+	    }
+  	</style>
+
+</head>
+<body>
+<canvas id="my_canvas" width="960px" height="191px"></canvas>
+<script>
+	var context=document.getElementById('my_canvas').getContext('2d');
+	var myImage = new Image();
+	myImage.src = "http://payload23.cargocollective.com/1/6/200359/2773164/player.png";
+	//myImage.addEventListener("load", loadImage, false);
+	 
+	var shiftx = 0;
+	var shifty=0;
+	var frameWidth = 95.7;
+	var frameHeight = 130.3;
+	var totalFramesx = 7;
+	var totalFramesy=3;
+	var currentFramex = 0;
+	var currentFramey = 0;
+	var move = 0;
+	var cH=context.canvas.height;
+	var cW=context.canvas.width;
+	 //animate();
+	setInterval(animate,200);
+
+	function animate() {
+	  context.clearRect(0, 0, cW, cH);
+	 
+	  //draw each frame + place them in the middle
+	  context.drawImage(myImage, shiftx, shifty, frameWidth, frameHeight,move, 25, frameWidth, frameHeight);
+	 //(name,clipX,clipY,clipW,clipH,x,y,w,h)
+	  shiftx += frameWidth ;
+	  ++currentFramex;
+	  if(currentFramex==totalFramesx)
+	  {
+	  	shiftx=0;
+	  	shifty+=frameHeight;
+	  	currentFramex=0;
+	  	++currentFramey;
+	  	if(currentFramey==totalFramesy)
+	  	{
+	  		shifty=0;
+	  		shiftx=0;
+	  		currentFramey=0;
+	  		currentFramex=0;
+	  		//context.clearInterval(animate);
+	  	}
+	  }
+	  move+=25;
+
+	  if (move >= 960)
+	  	move = 0;
+
+	  /*$(document).ready(function(){
+    	$("myImage").click(function(){
+    		$("myImage").stop();
+		});        
+    });*/
+}
+</script>
+</body>
+</html>
